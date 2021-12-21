@@ -11,7 +11,6 @@ Feature: Check to make sure the right ports are open on target server.
       """
       nmap -F <host>
       """
-    Then the output should match:
-      """
-      80/tcp\s+open
-      """
+    Then the output should match /80.tcp\s+open/
+    And the output should match /22.tcp\s+open/
+    And the output should match /25.tcp\s+filtered/
