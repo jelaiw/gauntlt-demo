@@ -6,7 +6,7 @@ Feature: Check to make sure the right ports are open on target server.
       | name       | value |
       | host       | scanme.nmap.org |
 
-  Scenario: Verify server is open on expected ports.
+  Scenario: Verify server is open on expected ports (and not open on any other ports).
     When I launch an "nmap" attack with:
       """
       nmap -F <host>
@@ -14,3 +14,4 @@ Feature: Check to make sure the right ports are open on target server.
     Then the output should match /80.tcp\s+open/
     And the output should match /22.tcp\s+open/
     And the output should match /25.tcp\s+filtered/
+    And the output should match /97 closed ports/
