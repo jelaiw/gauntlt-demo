@@ -36,6 +36,9 @@ RUN gem install gauntlt
 # nmap, dirb are available as Ubuntu standard packages.
 RUN apt-get install -y nmap dirb
 
+# Specify location for dirb wordlists.
+ENV DIRB_WORDLISTS /usr/share/dirb/wordlists
+
 # Consider deleting /var/lib/apt/lists to reduce image size.
 # See https://askubuntu.com/questions/179955/var-lib-apt-lists-is-huge.
 
