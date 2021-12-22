@@ -1,0 +1,18 @@
+@slow
+Feature: Run web fuzzer to check for common deployment mistakes.
+
+Scenario: Use dirb to enumerate webapp for test-related web directories (mistakenly deployed to prod).
+	Given "dirb" is installed
+	And the following profile:
+	| name | value |
+	| hostname | http://scanme.nmap.org |
+	| dirb_wordlists_path | Overwritten by $DIRB_WORDLISTS |
+	| wordlist | vulns/tests.txt |
+	When I launch a "dirb" attack with:
+	"""
+	dirb <hostname> <dirb_wordlists_path>/<wordlist> -wf
+	"""
+	Then the output should contain:
+	"""
+	FOUND: 0
+	"""
