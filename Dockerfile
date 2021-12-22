@@ -33,8 +33,8 @@ RUN gem install ffi -v 1.9.18
 RUN gem install gauntlt
 
 # Install attack tools.
-# nmap
-RUN apt-get install -y nmap
+# nmap, dirb are available as Ubuntu standard packages.
+RUN apt-get install -y nmap dirb
 
 # Consider deleting /var/lib/apt/lists to reduce image size.
 # See https://askubuntu.com/questions/179955/var-lib-apt-lists-is-huge.
