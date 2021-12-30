@@ -36,6 +36,12 @@ RUN gem install gauntlt
 # nmap, dirb are available as Ubuntu standard packages.
 RUN apt-get install -y nmap dirb
 
+# arachni
+WORKDIR /opt
+COPY vendor/arachni-1.5.1-0.5.12-linux-x86_64.tar.gz arachni-1.5.1-0.5.12-linux-x86_64.tar.gz
+RUN tar zxf arachni-1.5.1-0.5.12-linux-x86_64.tar.gz && \
+	ln -s /opt/arachni-1.5.1-0.5.12/bin/* /usr/local/bin
+
 # Specify location for dirb wordlists.
 ENV DIRB_WORDLISTS /usr/share/dirb/wordlists
 
