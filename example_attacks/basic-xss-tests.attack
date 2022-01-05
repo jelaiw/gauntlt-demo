@@ -3,20 +3,20 @@ Feature: Look for cross-site scripting (XSS) using arachni against our site.
 
 Background:
 	Given "arachni" is installed
-	And the following profile:
-	| name | value |
-	| url | http://example.com |
+	And the following environment variables:
+	| name | environment_variable_name |
+	| target_hostname | TARGET_HOSTNAME |
 
 Scenario: Perform a quick test for XSS and verify no issues on login page.
 	When I launch an "arachni" attack with:
 	"""
-	arachni --checks=xss --scope-page-limit=1 <url>
+	arachni --checks=xss --scope-page-limit=1 http://<target_hostname>
 	"""
 	Then the output should contain "0 issues were detected"
 
 Scenario: Perform a full test for XSS and verify no issues on login page.
 	When I launch an "arachni" attack with:
 	"""
-	arachni --checks=xss* --scope-page-limit=1 <url>
+	arachni --checks=xss* --scope-page-limit=1 http://<target_hostname>
 	"""
-	Then the output should contain "0 issues were detected"
+	Then the output should contain "2 issues were detected"
