@@ -42,6 +42,13 @@ COPY vendor/arachni-1.5.1-0.5.12-linux-x86_64.tar.gz arachni-1.5.1-0.5.12-linux-
 RUN tar zxf arachni-1.5.1-0.5.12-linux-x86_64.tar.gz && \
 	ln -s /opt/arachni-1.5.1-0.5.12/bin/* /usr/local/bin
 
+# log4j-scan
+# Note, python deps are not installed to venv.
+WORKDIR /opt
+COPY vendor/log4j-scan-v1.0.1.tar.gz log4j-scan-v1.0.1.tar.gz
+RUN tar zxf log4j-scan-v1.0.1.tar.gz && \
+	pip install -r log4j-scan-1.0.1/requirements.txt
+
 # Specify location for dirb wordlists.
 ENV DIRB_WORDLISTS /usr/share/dirb/wordlists
 
